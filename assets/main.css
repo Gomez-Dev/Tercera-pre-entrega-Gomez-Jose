@@ -24,6 +24,10 @@ body {
     gap: 20px;
 }
 
+.submenu{
+	justify-content: flex-end;
+}
+
 .card {
 	border-radius: 10px;
 	min-height: 200px;
