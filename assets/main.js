@@ -1,4 +1,4 @@
-//  window.onload = () => {}
+ window.onload = () => {
 
 // variables
 
@@ -6,6 +6,7 @@ const carrito = document.querySelector("#carrito");
 const contenedorCarrito = document.querySelector("#datos-carrito tbody");
 const vaciarCarritobtn = document.querySelector("#vaciar-carrito");
 const listaCarrito = document.querySelector("#lista-productos");
+let productosCarrito = [];
 
 
 registrarEventListeners();
@@ -25,13 +26,21 @@ function agregarProductos(e) {
 
 // Obteniendo datos del Producto
 function datosProcunto(Producto) {
-    console.log(Producto);
+    // console.log(Producto);
 
     //objeto del producto seleccionado
     const infoProducto = {
-        imagen: curso.querySelector("img").src,
-
+        imagen: Producto.querySelector("img").src,
+        titulo: Producto.querySelector("h5").textContent,
+        precio: Producto.querySelector(".precio span").textContent,
+        id: Producto.querySelector("a").getAttribute("data-id"),
+        cantidad: 1
     }
 
-    console.log(infoProducto);
+    // console.log(infoProducto);
+    // Agregar a productosCarrito
+
+    productosCarrito = [...productosCarrito, infoProducto];
+    console.log(productosCarrito);
+}
 }
