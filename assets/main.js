@@ -15,6 +15,11 @@ function registrarEventListeners() {
     listaCarrito.addEventListener("click", agregarProductos);
 
     carrito.addEventListener("click", eliminarProducto);
+
+    document.addEventListener("DOMcontentLoaded", () => {
+        productosCarrito = JSON.pasrse(localStorage.getItem("carrito")) || [];
+    })
+    carritoHTML();
 }
 
 // Funciones
@@ -76,7 +81,14 @@ function carritoHTML () {
             </td>
         `;
         contenedorCarrito.appendChild(row);
-    })
+    });
+
+    //Storage
+    aplicarStorage()
+}
+
+function aplicarStorage() {
+    localStorage.setItem("carrito", JSON.stringify(productosCarrito));
 }
 
 // Elimina productos mal cargados
