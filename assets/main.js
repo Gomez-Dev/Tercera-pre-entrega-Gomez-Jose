@@ -1,4 +1,4 @@
- window.onload = () => {
+//  window.onload = () => {
 
 // variables
 
@@ -9,9 +9,12 @@ const listaCarrito = document.querySelector("#lista-productos");
 let productosCarrito = [];
 
 
+// Agrga y elimina Productos del carrito
 registrarEventListeners();
 function registrarEventListeners() {
-    listaCarrito.addEventListener("click", agregarProductos)
+    listaCarrito.addEventListener("click", agregarProductos);
+
+    carrito.addEventListener("click", eliminarProducto);
 }
 
 // Funciones
@@ -23,7 +26,16 @@ function agregarProductos(e) {
         datosProcunto(procuntoSeleccionado)
     }
 }
+// Esta funcion elimina un producto
+function eliminarProducto(e) {
+    if(e.target.classList.contains("borrar-producto")) {
+        const productoId =e.target.getAttribute("data-id");
 
+        productosCarrito = productosCarrito.filter( producto => producto.id !== productoId);
+        console.log(productosCarrito);
+        productosCarrito();
+    }
+}
 // Obteniendo datos del Producto
 function datosProcunto(Producto) {
     // console.log(Producto);
@@ -42,5 +54,36 @@ function datosProcunto(Producto) {
 
     productosCarrito = [...productosCarrito, infoProducto];
     console.log(productosCarrito);
+    
+    carritoHTML();
+}
+
+// Carrito en HTML
+
+function carritoHTML () {
+
+    limpiarHTML();
+
+    productosCarrito.forEach( productocarrito => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>
+                ${productocarrito.titulo}
+                ${productocarrito.id}
+            </td>
+            <td>
+                <a href="#" class="borrar-curso" data-id="${productocarrito.id}"> X </a>
+            </td>
+        `;
+        contenedorCarrito.appendChild(row);
+    })
+}
+
+// Elimina productos mal cargados
+function limpiarHTML() {
+while(contenedorCarrito.firstChild) {
+    contenedorCarrito.removeChild(contenedorCarrito.firstChild)
 }
 }
+
+// }
